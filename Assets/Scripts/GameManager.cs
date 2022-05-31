@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour //ゲームの進行処理を担当する(主にゲーム
     public GameObject canvas;
 
     public GameObject stone; //stone , stoneHPはStoneの残り体力情報を取得するための変数
-    private int stoneHP;
+    public int stoneHP;
 
     Button[] buttons;
 
@@ -24,23 +24,21 @@ public class GameManager : MonoBehaviour //ゲームの進行処理を担当する(主にゲーム
     // Update is called once per frame
     void Update()
     {
-
-        if (stoneHP >= 0) 
+        if (stoneHP > 0) 
         {
             stoneHP = stone.GetComponent<Stone>().hp; //Stoneの残り体力を取得し続ける
         }
-        if(stoneHP <= 90) //GameOver処理
+        if(stoneHP <= 0) //GameOver処理
         {
-     
             gameOverUI.SetActive(true); //GameOverの文字をセットする
             buttons = canvas.GetComponentsInChildren<Button>(); //リトライ用ボタン
             buttons[0].onClick.AddListener(LoadCurrentScene);
-            
+            Time.timeScale = 0; //ゲーム動作を止める
             if (Input.GetKey(KeyCode.Alpha0)) //ボタンだけでなく0キーでもリトライできる
             {
                 LoadCurrentScene();
+                Time.timeScale = 1; //ゲームを再開する
             }
-
         }
     }
 

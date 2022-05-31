@@ -17,7 +17,7 @@ public class Score : MonoBehaviour //現在スコア&ハイスコアの処理、画面描画
 
     void Start()
     {
-        PlayerPrefs.DeleteAll(); //セーブデータに残るハイスコアデータの削除
+        //PlayerPrefs.DeleteAll(); //セーブデータに残るハイスコアデータの削除
         score = 0;
 
         highScore = PlayerPrefs.GetInt("SCORE", 0); //過去のハイスコアをロードする
